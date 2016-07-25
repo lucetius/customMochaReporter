@@ -8,12 +8,16 @@ module.exports = CustomMochaReporter;
 
 function CustomMochaReporter (runner, options) {
     var opts = this.getCustomOptions(options);
+    var artifactsDir = _.get(options, 'reporterOptions.artifactsDir', '');
+    if (artifactsDir) { artifactsDir += '/'; }
 
-    var awesomeOptions = options;
+    var awesomeOptions = _.clone(options);
+    opts.awesomeOptions.reporterOptions.reportDir = artifactsDir + opts.awesomeOptions.reporterOptions.reportDir;
     awesomeOptions.reporterOptions = opts.awesomeOptions.reporterOptions;
     Mochawesome(runner, awesomeOptions);
 
-    var jUnitOptions = options;
+    var jUnitOptions = _.clone(options);
+    opts.jUnitOptions.reporterOptions.mochaFile = artifactsDir + opts.jUnitOptions.reporterOptions.mochaFile;
     jUnitOptions.reporterOptions = opts.jUnitOptions.reporterOptions;
     new MochaJUnitReporter(runner, jUnitOptions);
 }
