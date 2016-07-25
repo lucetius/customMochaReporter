@@ -1,6 +1,6 @@
 {
   "name": "customMochaReporter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Runner reporter for mochawesome and mocha-junit-reporter.",
   "main": "customMochaReporter.js",
   "dependencies": {
